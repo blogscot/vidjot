@@ -1,0 +1,17 @@
+{
+  "name": "vidjot",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.13.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
