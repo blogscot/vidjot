@@ -8,4 +8,8 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/add', (req, res) => {
+  res.render('ideas/add')
+})
+
 module.exports = router
