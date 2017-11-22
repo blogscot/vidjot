@@ -14,6 +14,13 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/edit/:id', (req, res) => {
+  const { id } = req.params
+  db.Idea.findOne({ _id: id }).then(idea => {
+    res.render('ideas/edit', { idea })
+  })
+})
+
 router.post('/', (req, res) => {
   let errorMessages = {
     title: 'Please enter a title.',
