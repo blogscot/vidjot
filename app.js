@@ -4,6 +4,8 @@ const db = require('./models')
 
 const app = express()
 
+const idea = db.Idea
+
 // Middleware
 app.engine('handlebars', hbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')

@@ -7,3 +7,5 @@ mongoose.connect('mongodb://localhost/vidjot', {
   reconnectTries: Number.MAX_VALUE,
   useMongoClient: true,
 })
+
+module.exports.Idea = require('./idea')
