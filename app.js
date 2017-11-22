@@ -1,4 +1,5 @@
 const express = require('express')
+const methodOverride = require('method-override')
 const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 
@@ -8,6 +9,8 @@ const app = express()
 // Middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(methodOverride('_method'))
 
 app.engine('handlebars', hbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')

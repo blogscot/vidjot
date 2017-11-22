@@ -21,6 +21,14 @@ router.get('/edit/:id', (req, res) => {
   })
 })
 
+router.put('/:id', (req, res) => {
+  const { id } = req.params
+  const { title, details } = req.body
+  db.Idea.findByIdAndUpdate({ _id: id }, { title, details }, () => {
+    res.redirect('/ideas')
+  })
+})
+
 router.post('/', (req, res) => {
   let errorMessages = {
     title: 'Please enter a title.',
