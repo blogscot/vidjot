@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../models')
 
 router.get('/', (req, res) => {
   const title = 'Ideas'
@@ -30,7 +31,12 @@ router.post('/', (req, res) => {
       details,
     })
   } else {
-    res.sendStatus(200)
+    const newUser = {
+      title,
+      details,
+    }
+    const user = new db.Idea(newUser)
+    user.save().then(() => res.redirect('/ideas'))
   }
 })
 

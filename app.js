@@ -3,11 +3,7 @@ const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 
 const ideaRoutes = require('./routes/idea')
-const db = require('./models')
 const app = express()
-
-// Database Schemas
-const idea = db.Idea
 
 // Middleware
 app.use(bodyParser.json())
