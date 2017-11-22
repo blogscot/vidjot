@@ -24,6 +24,7 @@ router.get('/edit/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
   const { id } = req.params
   db.Idea.findByIdAndRemove({ _id: id }, () => {
+    req.flash('success_msg', 'Video Idea removed')
     res.redirect('/ideas')
   })
 })
@@ -32,6 +33,7 @@ router.put('/:id', (req, res) => {
   const { id } = req.params
   const { title, details } = req.body
   db.Idea.findByIdAndUpdate({ _id: id }, { title, details }, () => {
+    req.flash('success_msg', 'Video Idea updated')
     res.redirect('/ideas')
   })
 })
@@ -58,6 +60,7 @@ router.post('/', (req, res) => {
       details,
     })
   } else {
+    req.flash('success_msg', 'New Video idea added')
     new db.Idea({
       title,
       details,
