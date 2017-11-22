@@ -21,6 +21,13 @@ router.get('/edit/:id', (req, res) => {
   })
 })
 
+router.delete('/delete/:id', (req, res) => {
+  const { id } = req.params
+  db.Idea.findByIdAndRemove({ _id: id }, () => {
+    res.redirect('/ideas')
+  })
+})
+
 router.put('/:id', (req, res) => {
   const { id } = req.params
   const { title, details } = req.body

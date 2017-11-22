@@ -3,7 +3,11 @@
 <div class="card card-body mb-2">
   <h4>{{title}}</h4>
   <p>{{details}}</p>
-  <a type='submit' class='btn btn-primary btn-block' href="/ideas/edit/{{_id}}">Edit</a>
+  <a type='submit' class='btn btn-primary btn-block mb-2' href="/ideas/edit/{{_id}}">Edit</a>
+  <form action="/ideas/delete/{{_id}}?_method=delete" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <button type="submit" class='btn btn-danger btn-block'>Delete</button>
+  </form>
 </div>
 {{else}}
 <p>Wow! You seem to be out of ideas.</p>
