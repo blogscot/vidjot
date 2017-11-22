@@ -4,9 +4,14 @@ const db = require('../models')
 
 router.get('/', (req, res) => {
   const title = 'Ideas'
-  res.render('ideas', {
-    title,
-  })
+  const ideas = db.Idea.find({})
+    .sort({ date: 'desc' })
+    .then(ideas => {
+      res.render('ideas', {
+        title,
+        ideas,
+      })
+    })
 })
 
 router.post('/', (req, res) => {
@@ -31,12 +36,12 @@ router.post('/', (req, res) => {
       details,
     })
   } else {
-    const newUser = {
+    new db.Idea({
       title,
       details,
-    }
-    const user = new db.Idea(newUser)
-    user.save().then(() => res.redirect('/ideas'))
+    })
+      .save()
+      .then(() => res.redirect('/ideas'))
   }
 })
 

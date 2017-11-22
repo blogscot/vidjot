@@ -1,1 +1,9 @@
 <h1>Ideas</h1>
+{{#each ideas}}
+<div class="card card-body mb-2">
+  <h4>{{title}}</h4>
+  <p>{{details}}</p>
+</div>
+{{else}}
+<p>Wow! You seem to be out of ideas.</p>
+{{/each}}
