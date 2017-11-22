@@ -1,5 +1,6 @@
 const express = require('express')
 const hbs = require('express-handlebars')
+const ideaRoutes = require('./routes/idea')
 const db = require('./models')
 
 const app = express()
@@ -21,6 +22,8 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about')
 })
+
+app.use('/ideas', ideaRoutes)
 
 const port = 5000
 
