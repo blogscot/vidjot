@@ -9,3 +9,4 @@ mongoose.connect('mongodb://localhost/vidjot', {
 })
 
 module.exports.Idea = require('./idea')
+module.exports.User = require('./user')
