@@ -1,0 +1,16 @@
+nav > div > img {
+  position: fixed;
+  height: 40px;
+  margin: 0 20px;
+  background: white;
+  border-radius: 5px;
+}
+
+nav > div > img:hover {
+  transform: rotateY(360deg);
+  transition: transform 2s;
+}
+
+nav .navbar-brand {
+  margin-left: 100px;
+}

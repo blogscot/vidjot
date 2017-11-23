@@ -4,11 +4,16 @@ const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
+const path = require('path')
 
+const usersRoute = require('./routes/users')
 const ideaRoutes = require('./routes/idea')
 const app = express()
 
 // Middleware
+// configuration for static css and images files
+app.use(express.static(path.join(__dirname, '/')))
+
 app.use(
   session({
     secret: 'ldD2231c92n39dqps@ah-234',
@@ -46,6 +51,7 @@ app.get('/about', (req, res) => {
   res.render('about')
 })
 
+app.use('/users', usersRoute)
 app.use('/ideas', ideaRoutes)
 
 const port = 5000
