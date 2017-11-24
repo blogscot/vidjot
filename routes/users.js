@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../models')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
+const db = require('../models')
 const user = new db.User()
 
 router.get('/login', (req, res) => {
@@ -14,6 +14,7 @@ router.get('/register', (req, res) => {
   res.render('auth/register')
 })
 
+// Process Registration
 router.post('/register', (req, res) => {
   let errors = []
   const errorMessages = {
@@ -73,28 +74,13 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.post('/login', (req, res) => {
-  const { email, password } = req.body
-
-  db.User.findOne({ email })
-    .then(user => {
-      bcrypt.compare(password, user.password).then(result => {
-        if (result) {
-          req.flash(
-            'success_msg',
-            `Welcome ${user.name}, you are now logged in`
-          )
-          res.redirect('/ideas')
-        } else {
-          req.flash('error_msg', 'Unable to login.')
-          res.redirect('login')
-        }
-      })
-    })
-    .catch(err => {
-      req.flash('error_msg', 'Unable to login.')
-      res.redirect('login')
-    })
+// Process Login
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/ideas',
+    failureRedirect: '/users/login',
+    failureFlash: true,
+  })(req, res, next)
 })
 
 module.exports = router

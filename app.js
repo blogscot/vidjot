@@ -5,9 +5,12 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
 const path = require('path')
+const passport = require('passport')
+require('./config/passport')(passport)
 
 const usersRoute = require('./routes/users')
 const ideaRoutes = require('./routes/idea')
+
 const app = express()
 
 // Middleware
@@ -21,6 +24,10 @@ app.use(
     saveUninitialized: true,
   })
 )
+
+// Use Passport after sesssion setup
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
