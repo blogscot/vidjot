@@ -10,6 +10,7 @@ require('./config/passport')(passport)
 
 const usersRoute = require('./routes/users')
 const ideaRoutes = require('./routes/idea')
+const { ensureAuthenticated } = require('./helpers/auth')
 
 const app = express()
 
@@ -61,7 +62,7 @@ app.get('/about', (req, res) => {
 })
 
 app.use('/users', usersRoute)
-app.use('/ideas', ideaRoutes)
+app.use('/ideas', ensureAuthenticated, ideaRoutes)
 
 const port = 5000
 
