@@ -20,5 +20,4 @@ const UserSchema = new Schema({
   },
 })
 
-const Idea = mongoose.model('users', UserSchema)
-module.exports = Idea
+module.exports = mongoose.model('users', UserSchema)
