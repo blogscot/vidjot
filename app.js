@@ -64,7 +64,7 @@ app.get('/about', (req, res) => {
 app.use('/users', usersRoute)
 app.use('/ideas', ensureAuthenticated, ideaRoutes)
 
-const port = 5000
+const port = process.env.PORT || 5000
 
 app.listen(port, () => {
   console.log(`Server available on http://localhost:${port}`)
