@@ -4,7 +4,7 @@ const db = require('../models')
 
 router.get('/', (req, res) => {
   const title = 'Ideas'
-  const ideas = db.Idea.find({})
+  const ideas = db.Idea.find({ user: req.user.id })
     .sort({ date: 'desc' })
     .then(ideas => {
       res.render('ideas', {
@@ -17,7 +17,13 @@ router.get('/', (req, res) => {
 router.get('/edit/:id', (req, res) => {
   const { id } = req.params
   db.Idea.findOne({ _id: id }).then(idea => {
-    res.render('ideas/edit', { idea })
+    // Confirm user is the idea owner
+    if (idea.user !== req.user.id) {
+      req.flash('error_msg', 'Unauthorised edit action')
+      res.redirect('/ideas')
+    } else {
+      res.render('ideas/edit', { idea })
+    }
   })
 })
 
@@ -64,6 +70,7 @@ router.post('/', (req, res) => {
     new db.Idea({
       title,
       details,
+      user: req.user.id,
     })
       .save()
       .then(() => res.redirect('/ideas'))

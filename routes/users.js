@@ -30,7 +30,7 @@ router.post('/register', (req, res) => {
     errors = errors.concat([{ message: errorMessages.tooShort }])
   }
 
-  // is the password unique?
+  // is the email unique?
   db.User.findOne({ email })
     .then(user => {
       if (user) {
